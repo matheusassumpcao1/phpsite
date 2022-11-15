@@ -25,19 +25,10 @@
     <a href="logout.php">Deslogar</a>
 
     <div class="container">
-        <h1>Teste recebimento de imagens Database usando PHP</h1>
+        <h1>Livros disponiveis</h1>
 
-        <div class="galeria">
-            <?php if($result->num_rows > 0){ ?>
-            <div class="img-box">
-                <?php while($row = $result->fetch_assoc()){ ?>
-                <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['img']); ?>"/>
-                <?php } ?>
-            </div>
-            <?php }else { ?>
-            <p>Imagens nao encontradas</p>
-            <?php } ?>
-        </div>
+        <div>
+            <?php include 'tabela.php'; ?>
         </div>
 
 

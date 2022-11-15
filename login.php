@@ -6,17 +6,7 @@
 </head>  
 
 <body>  
-  <center><h1>Bem vindo a numseiquela</h1></center>  
-       
-  <p>
-    <a href="register.php">
-      Registrar
-    </a>
-    | 
-    <a href="login.php">
-      Login
-    </a>
-  </p>
+  <center><h1>Bem vindo a Biblioteca</h1></center>
 
   <center><h2>Login</h2></center>
   
@@ -32,20 +22,21 @@
       
         if(!empty($_POST['user']) && !empty($_POST['pass'])) {  
             $user=$_POST['user'];  
-            $pass=$_POST['pass'];  
+            $pass=$_POST['pass'];
         
             //Funcoes de inicializacao
             $con=mysqli_connect('localhost','root','') or die(mysql_error());  
             mysqli_select_db($con, 'user_registration') or die("cannot select DB");  
         
-            $query=mysqli_query($con, "SELECT * FROM login WHERE username='".$user."' AND password='".$pass."'");  
+            $query=mysqli_query($con, "SELECT * FROM login WHERE username='".$user."' AND password='".$pass."'"); 
             $numrows=mysqli_num_rows($query);  
             if($numrows!=0)  
             {  
                 while($row=mysqli_fetch_assoc($query))  
                 {  
                     $dbusername=$row['username'];  
-                    $dbpassword=$row['password'];  
+                    $dbpassword=$row['password'];
+                    $dbtipo=$row['tipo'];
                 }  
         
                 if($user == $dbusername && $pass == $dbpassword)  
@@ -54,7 +45,14 @@
                     $_SESSION['sess_user']=$user;  
         
                     /* Redireciona o browser */  
-                    header("Location: member.php");  
+                    if($dbtipo == 'bibliotecario')
+                    {
+                      header("Location: bibliotecario.php");
+                    } elseif($dbtipo == 'adm') {
+                    header("Location: adm.php");
+                    } else {
+                      header("Location: leitor.php");
+                    }
                 }  
             } else {  
                 echo "Usuario ou senha invalido(s)";
