@@ -36,8 +36,8 @@ if ($row['emprestado'] == 0) {
 
 } 
 echo "  </td>";
-echo "</tr>";
 }
+echo "</tr>";
 echo "</table>";
 
 mysqli_close($db);
